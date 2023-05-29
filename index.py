@@ -14,12 +14,7 @@ from google.colab import drive
 drive.mount('/content/drive')
 
 #install library
-pip install numpy
-pip install pandas
-pip install sastrawi
-pip install swifter
-pip install gensim
-pip install nltk
+
 
 import numpy as np
 import pandas as pd
@@ -82,8 +77,6 @@ def remove_punctuation(text):
   return text
 data["penjelasan"]=data["penjelasan"].apply(remove_punctuation)
 data
-
-pip install nltk
 
 import nltk 
 nltk.download("punkt")

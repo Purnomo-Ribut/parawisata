@@ -73,7 +73,7 @@ def remove_punctuation(text):
 data["penjelasan"]=data["penjelasan"].apply(remove_punctuation)
 data
 
-!pip install nltk
+
 
 import nltk 
 nltk.download("punkt")

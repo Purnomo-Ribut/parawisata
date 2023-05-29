@@ -22,7 +22,7 @@ import pandas as pd
 """## Data Wisata Sumenep"""
 data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
 # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
-data.head
+data.head(5)
 
 #ukuran data
 data.shape

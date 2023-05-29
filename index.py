@@ -7,19 +7,9 @@ Original file is located at
     https://colab.research.google.com/drive/1htjmO-io-3GaPFUf5LY2XE1RP40kFq6Z
 """
 
-from google.colab import drive
-drive.mount('/content/drive')
-
-from google.colab import drive
-drive.mount('/content/drive')
 
 #install library
-pip install numpy
-pip install pandas
-pip install sastrawi
-pip install swifter
-pip install gensim
-pip install nltk
+
 
 import numpy as np
 import pandas as pd

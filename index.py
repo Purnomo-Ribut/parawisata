@@ -43,7 +43,7 @@ data.isnull().sum()
 
 data["label"].value_counts()
 
-import regex as re
+#import regex as re
 
 """## Preprocessing"""
 

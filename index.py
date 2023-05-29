@@ -7,11 +7,11 @@ Original file is located at
     https://colab.research.google.com/drive/1htjmO-io-3GaPFUf5LY2XE1RP40kFq6Z
 """
 
-from google.colab import drive
-drive.mount('/content/drive')
+#from google.colab import drive
+#drive.mount('/content/drive')
 
-from google.colab import drive
-drive.mount('/content/drive')
+#from google.colab import drive
+#drive.mount('/content/drive')
 
 #install library
 

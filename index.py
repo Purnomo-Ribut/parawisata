@@ -127,13 +127,11 @@ elif option == 'Modeling':
 	st.write("""Hasil Cleaning """)	
 	data
 	
-	#hapus angka
-	st.write("""Hapus Angka """)
+	#hapus angka	
 	def del_num(text):
 	  text =re.sub("\d+","",text)
 	  return text
-	data["penjelasan"]=data["penjelasan"].apply(del_num)
-	st.write("""Hasil Hapus Angka """)	
+	data["penjelasan"]=data["penjelasan"].apply(del_num)	
 	data
 	
     

@@ -18,6 +18,7 @@ Original file is located at
 import streamlit as st
 import numpy as np
 import pandas as pd
+import re
 
 #Modul library Metode 
 #from sklearn.naive_bayes import GaussianNB

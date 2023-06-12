@@ -91,17 +91,17 @@ elif option == 'Modeling':
     #data.dropna(inplace=True)
     #data.isnull().sum()
     #data["label"].value_counts()
-    	def tambah_input(nama_metode): 
-    		inputan = dict()
-    		if nama_metode == "K-Nearst Neighbors":
-        		K = st.slider("K", 1, 15)
-        		inputan["K"] = K
-    		elif nama_metode == "Decission Tree":
-        		kriteria = st.selectbox("pilih kriteria", ("entropy", "gini"))
-        		inputan["kriteria"] = kriteria
-        		max_depth = st.slider("max depth", 2, 15)
-        		inputan["max_depth"] = max_depth
-    		return inputan
+    	def tambah_input(nama_metode):
+	    inputan = dict()
+	    if nama_metode == "K-Nearst Neighbors":
+		K = st.slider("K", 1, 15)
+		inputan["K"] = K
+	    elif nama_metode == "Decission Tree":
+		kriteria = st.selectbox("pilih kriteria", ("entropy", "gini"))
+		inputan["kriteria"] = kriteria
+		max_depth = st.slider("max depth", 2, 15)
+		inputan["max_depth"] = max_depth
+	    return inputan
 
 	def pilih_kelas(nama_metode, inputan):
     		data = load_dataset()

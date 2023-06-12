@@ -26,7 +26,7 @@ import pandas as pd
 
 st.title('E-LEARNING STUDENTS REACTIONS')
 st.write ("""
-       Purnomo Ribut | 200411100156
+       Purnomo Ribut | 200411100156 <br>
        Indra Ramadan Fadilafani | 200411100158
 """)
 dataset, modelling, implementasi = st.tabs(["Dataset", "Modelling", "Implementasi"])

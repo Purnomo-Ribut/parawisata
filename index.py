@@ -63,7 +63,14 @@ tersebut. berikut data yang kami ambil :
 
     * Stemming, Stemming adalah proses pengubahan bentuk kata menjadi kata dasar atau tahap mencari root dari tiap kata.
     
-    Dilanjutkan dengan Pembobotan data, Pembobotan kata yang dilakukan adalah kata yang terdapat dalam teks akan diberi berat atau bobot dengan menggunakan metode TF-IDF (Term Frequency - Inverse Document Frequency). Istilah yang terdapat pada satu dokumen lebih difokuskan pada TF (Term Frequency) sedangkan IDF(Inverse Document Frequency) lebih difokuskan pada istilah di banyak dokumen. Metode TF-IDF menggabungkan dua cara untuk perhitungan bobotnya, yaitu dengan menghitung frekuensi kemunculan kata di sebuah dokumen tertentu (TF) dan melakukan perhitungan invers terhadap frekuensi dokumen yang mengandung kata tersebut (IDF).Operator yang digunakan dalam menghubungkan operator dengan data tabel menggunakan operator nominal to text karena dalam Process Documents from Data harus bersifat teks sedangkan data pada tabel bersifat polynomial.
+    Dilanjutkan dengan Pembobotan data, 
+    * Pembobotan kata yang dilakukan adalah kata yang terdapat dalam teks akan diberi berat atau bobot dengan menggunakan metode TF-IDF (Term Frequency - Inverse Document Frequency). Istilah yang terdapat pada satu dokumen lebih difokuskan pada TF (Term Frequency) sedangkan IDF(Inverse Document Frequency) lebih difokuskan pada istilah di banyak dokumen. Metode TF-IDF menggabungkan dua cara untuk perhitungan bobotnya, yaitu dengan menghitung frekuensi kemunculan kata di sebuah dokumen tertentu (TF) dan melakukan perhitungan invers terhadap frekuensi dokumen yang mengandung kata tersebut (IDF).Operator yang digunakan dalam menghubungkan operator dengan data tabel menggunakan operator nominal to text karena dalam Process Documents from Data harus bersifat teks sedangkan data pada tabel bersifat polynomial.
+    
+    Selanjutnya di Modelling 
+    * Dalam tahapan ini Naive Bayes Classification merupakan teknik klasifikasi berdasarkan Teorema Bayes dengan asumsi independensi di antara para prediktor. Naive Bayes Classifier memprediksi peluang di masa depan berdasarkan pengalaman di masa sebelumnya sehingga dikenal sebagai Teorema Bayes. Dalam istilah sederhana, penggolongan Naive Bayes menganggap bahwa kehadiran fitur tertentu di kelas tidak terkait dengan kehadiran fitur lainnya (Hidayatullah, 2014) . Keuntungan penggunan adalah bahwa metode ini hanya membutuhkan jumlah data pelatihan (training data) yang kecil untuk menentukan estimasi parameter yg diperlukan dalam proses pengklasifikasian. Karena yang diasumsikan sebagai variabel independent, maka hanya varians dari suatu variabel dalam sebuah kelas yang dibutuhkan untuk menentukan klasifikasi, bukan keseluruhan dari matriks kovarians. Pada tahapan ini dilakukan modelling dengan model naïve bayes dari data latih yang sudah di pre processing sebelumnya dan diuji dengan data uji
+
+    Selanjutnya Klasifikasi 
+    * Pada tahapan proses ini dilakukan untuk menentukan kelas pada masing-masing objek wisata apakah termasuk wisata alam atau buatan dengan menerapkan metode Naive Naive baiyes
     
 
     """)

@@ -214,13 +214,13 @@ elif option == 'Modeling':
 	  for term in document:
 	    if term not in term_dict:
 	      term_dict[term] = ''
-	print(len(term_dict))
+	st.write(len(term_dict))
 
 	for term in term_dict:
 	  term_dict[term] = stemming(term)
 	  print(term,":",term_dict[term])
 
-	print(term_dict)
+	st.write(term_dict)
 
 	def get_stemming(document):
 	  return [term_dict[term] for term in document]
@@ -255,19 +255,21 @@ elif option == 'Modeling':
 	Y
 
 	from sklearn.model_selection import train_test_split
-	X_train, X_test, Y_train, Y_test = train_test_split( 
-	    X, Y, test_size = 0.3, random_state = 100)
-	print("Jumlah Data training : ", len(X_train))
-	print("Jumlah Data test : ", len(X_test))
+	X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.3, random_state = 100)
+	st.write("Jumlah Data training : ", len(X_train))
+	st.write("Jumlah Data test : ", len(X_test))
 
 	from sklearn.naive_bayes import GaussianNB
 	gnb_model = GaussianNB()
 	gnb_model.fit(X_train, Y_train)
+	Y_pred = gnb_model.predict(X_test)
+	# Menggabungkan X_test dan Y_pred menjadi satu array dua dimensi
+	data_pred = list(zip(X_test, Y_pred))
 
-	from wordcloud import WordCloud
-
-	allWords = ' '.join([twts for twts in data['penjelasan']])
-	wordCloud = WordCloud(width=1600, height=800, random_state=30, max_font_size=200, min_font_size=20).generate(allWords)
+	# Membuat dataframe hasil prediksi
+	df_pred = pd.DataFrame(data_pred, columns=['Text', 'Label Prediksi'])
+	# Menampilkan dataframe
+	st.write(df_pred)
 
 	from sklearn.metrics import accuracy_score
 	Y_pred = gnb_model.predict(X_test)

@@ -84,24 +84,34 @@ elif option == 'Modeling':
 	
 	""")
 	code = '''
+	# Membaca file CSV "destinasi wisata madura - Sheet1.csv" dan menyimpan datanya ke dalam variabel `data`
 	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
-	data = data.drop('no', axis=1)	
+
+	# Menghapus kolom 'no' dari DataFrame `data`
+	data = data.drop('no', axis=1)
+
+	# Menghitung jumlah nilai null (kosong) dalam setiap kolom DataFrame `data`
 	data.isnull().sum()
+
+	# Menampilkan informasi tentang DataFrame `data`, termasuk jumlah baris, jumlah kolom, dan tipe data setiap kolom
 	data.info()
-	#drop data kosong
+
+	# Menghapus baris yang mengandung nilai null dari DataFrame `data`
 	data.dropna(inplace=True)
+
+	# Kembali menghitung jumlah nilai null (kosong) dalam setiap kolom DataFrame `data` setelah baris-baris yang mengandung nilai null dihapus
 	data.isnull().sum()
-	data["label"].value_counts()'''
+
+	# Menghitung jumlah kemunculan setiap nilai dalam kolom 'label' DataFrame `data` dan menampilkannya
+	data["label"].value_counts()
+	'''
 
 	st.code(code, language='python')
 	
 	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
-	# df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
 	data = data.drop('no', axis=1)
-	#data = data.drop('no', axis=1)
 	data.isnull().sum()
 	data.info()
-	#drop data kosong
 	data.dropna(inplace=True)
 	data.isnull().sum()
 	data["label"].value_counts()

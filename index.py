@@ -271,7 +271,7 @@ elif option == 'Modeling':
 
 	from sklearn.metrics import accuracy_score
 	Y_pred = gnb_model.predict(X_test)
-	print (" GNB Accuracy : ",accuracy_score(Y_test,Y_pred)*100)
+	st.write(" GNB Accuracy : ",accuracy_score(Y_test,Y_pred)*100)
 
     
 	    
@@ -308,15 +308,7 @@ dataset, modelling, implementasi = st.tabs(["Dataset", "Modelling", "Implementas
 
 with dataset:
     """## Data Wisata Sumenep"""
-    
 
-
-#ukuran data
-data.shape
-
-
-
-#import regex as re
 
 
 

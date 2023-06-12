@@ -26,18 +26,23 @@ import pandas as pd
 
 option = st.sidebar.selectbox(
     'Silakan pilih:',
-    ('Home','Modeling','Chart')
+    ('Home','Modeling','Implementasi')
 )
 
 if option == 'Home' or option == '':
     st.write("""# Halaman Utama""") #menampilkan halaman utama
-    st.title('E-LEARNING STUDENTS REACTIONS')
     st.write (""" 
                 Purnomo Ribut | 200411100156
     
                 Indra Ramadan Fadilafani | 200411100158 """)
-    
-    
+    st.write("""
+                Dataset yang kami gunakan dalam penelitian ini dengan cara scrawling data di google dengan
+website Mytrip dan website random lainnya. dalam website ini kami mengambil nama wisata dan penjelasan wisata
+tersebut. berikut data yang kami ambil 
+    """)
+    data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
+    # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
+    data
     
 elif option == 'Modeling':
     st.write("""## Modeling Naive Bayes""") #menampilkan judul halaman dataframe
@@ -71,9 +76,7 @@ dataset, modelling, implementasi = st.tabs(["Dataset", "Modelling", "Implementas
 
 with dataset:
     """## Data Wisata Sumenep"""
-    data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
-    # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
-    data.head(5)
+    
 
 
 #ukuran data

@@ -83,8 +83,15 @@ elif option == 'Modeling':
 	Naïve bayes adalah algoritma yang dikembangkan berdasarkan teorema bayes yang mengasumsikan setiap atribut sebagai independen sendiri dan berbeda dengan atribut lainnya. menggunakan metode Naive Bayes untuk membantu wisatawan dalam memilih objek wisata yang sesuai dengan preferensi mereka. Metode Naive Bayes dipilih karena telah terbukti efektif dalam melakukan klasifikasi pada data dengan fitur yang kompleks seperti halnya pada klasifikasi objek wisata.
 	
 	""")
-	code = '''def hello():
-    	print("Hello, Streamlit!")'''
+	code = '''
+	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
+	data = data.drop('no', axis=1)	
+	data.isnull().sum()
+	data.info()
+	#drop data kosong
+	data.dropna(inplace=True)
+	data.isnull().sum()
+	data["label"].value_counts()'''
 
 	st.code(code, language='python')
 	

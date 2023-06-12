@@ -24,9 +24,7 @@ import pandas as pd
 #from sklearn.neighbors import KNeighborsClassifier
 #from sklearn.tree import DecisionTreeClassifier
 def load_dataset():
-	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
-	data = df.replace(",",".",regex=True)
-	data = df.drop(columns=["Unnamed: 0"])
+	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")	
 	return df
 
 option = st.sidebar.selectbox(

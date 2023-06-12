@@ -32,7 +32,7 @@ def load_dataset():
 
 option = st.sidebar.selectbox(
     'Silakan pilih:',
-    ('Dataset','Modeling','Implementasi')
+    ('Dataset','Modeling')
 )
 
 if option == 'Dataset' or option == '':
@@ -81,7 +81,7 @@ tersebut. berikut data yang kami ambil :
     
     
 elif option == 'Modeling':
-	st.write("""## Modeling Naive Bayes""") #menampilkan judul halaman dataframe
+	st.write("""## Modeling dan Implementasi Naive Bayes""") #menampilkan judul halaman dataframe
 	st.write("""
 	Naïve bayes adalah algoritma yang dikembangkan berdasarkan teorema bayes yang mengasumsikan setiap atribut sebagai independen sendiri dan berbeda dengan atribut lainnya. menggunakan metode Naive Bayes untuk membantu wisatawan dalam memilih objek wisata yang sesuai dengan preferensi mereka. Metode Naive Bayes dipilih karena telah terbukti efektif dalam melakukan klasifikasi pada data dengan fitur yang kompleks seperti halnya pada klasifikasi objek wisata.
 	
@@ -160,9 +160,9 @@ elif option == 'Modeling':
 
 	from nltk.tokenize import word_tokenize
 	data["hasil"]=data["penjelasan"].apply(lambda x: nltk.word_tokenize(x))
+	st.write(""" Hasil Tokenizing """)
 	data["hasil"]
-
-	data
+	
 
 	normalize = pd.read_excel("Normalization Data.xlsx")
 	normalize_word_dict={}
@@ -186,6 +186,7 @@ elif option == 'Modeling':
 	  filter = [word for word in filter if word not in txt_stopwords]
 	  return filter
 	data["stopwords_removal"]=data["comment_normalize"].apply(stopword_removal)
+	st.write(""" Hasil stopwords removal Pertama""")
 	data["stopwords_removal"]
 
 	#removal2
@@ -195,9 +196,10 @@ elif option == 'Modeling':
 	  filter =[word for word in filter if word not in data_stopwords]
 	  return filter
 	data["stopwords_removal_final"]=data["stopwords_removal"].apply(stopword_removal2)
+	st.write(""" Hasil stopwords removal Final""")
 	data["stopwords_removal_final"]
 
-	"""## Stemming"""
+	"""#Proses Stemming"""
 
 	#proses stem
 	from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
@@ -213,13 +215,11 @@ elif option == 'Modeling':
 	for document in data['stopwords_removal_final']:
 	  for term in document:
 	    if term not in term_dict:
-	      term_dict[term] = ''
-	st.write(len(term_dict))
+	      term_dict[term] = ''	
 
 	for term in term_dict:
 	  term_dict[term] = stemming(term)
 	  print(term,":",term_dict[term])
-
 	st.write(term_dict)
 
 	def get_stemming(document):
@@ -228,6 +228,7 @@ elif option == 'Modeling':
 	data['stemming'] = data['stopwords_removal_final'].swifter.apply(get_stemming)
 
 	print(data['stemming'])
+	st.write("Hasil Stemming")
 	data.head(20)
 
 	#Perhitungan TF-IDF
@@ -239,8 +240,10 @@ elif option == 'Modeling':
 	  return kalimat
 
 	text = data['stemming'].swifter.apply(joinkata)
+	st.write("Hasil Perhitungan TF-IDF")
 	text
-
+	
+	"""#Modeling Naive Bayes """
 	from sklearn.feature_extraction.text import TfidfVectorizer
 	tfidf_vectorizer = TfidfVectorizer()
 	tfidf_separate = tfidf_vectorizer.fit_transform(text)
@@ -251,11 +254,13 @@ elif option == 'Modeling':
 	X = df_tfidf.values
 	Y = data['label']
 	df_tfidf
-
+	
+	st.write("Data Data Label")
 	Y
-
+	
 	from sklearn.model_selection import train_test_split
 	X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.3, random_state = 100)
+	st.write("Pembagian Data Training dan Testing)
 	st.write("Jumlah Data training : ", len(X_train))
 	st.write("Jumlah Data test : ", len(X_test))
 
@@ -269,8 +274,10 @@ elif option == 'Modeling':
 	# Membuat dataframe hasil prediksi
 	df_pred = pd.DataFrame(data_pred, columns=['Text', 'Label Prediksi'])
 	# Menampilkan dataframe
+	st.write("Tabel Prediksi Label")
 	st.write(df_pred)
-
+	
+	
 	from sklearn.metrics import accuracy_score
 	Y_pred = gnb_model.predict(X_test)
 	st.write(" GNB Accuracy : ",accuracy_score(Y_test,Y_pred)*100)

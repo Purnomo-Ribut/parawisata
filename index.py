@@ -79,6 +79,14 @@ tersebut. berikut data yang kami ambil :
     
 elif option == 'Modeling':
 	st.write("""## Modeling Naive Bayes""") #menampilkan judul halaman dataframe
+	st.write("""
+	Naïve bayes adalah algoritma yang dikembangkan berdasarkan teorema bayes yang mengasumsikan setiap atribut sebagai independen sendiri dan berbeda dengan atribut lainnya. menggunakan metode Naive Bayes untuk membantu wisatawan dalam memilih objek wisata yang sesuai dengan preferensi mereka. Metode Naive Bayes dipilih karena telah terbukti efektif dalam melakukan klasifikasi pada data dengan fitur yang kompleks seperti halnya pada klasifikasi objek wisata.
+	
+	""")
+	code = '''def hello():
+    	print("Hello, Streamlit!")'''
+
+	st.code(code, language='python')
 	
 	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
 	# df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)

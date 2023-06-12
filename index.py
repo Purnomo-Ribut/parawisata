@@ -62,6 +62,9 @@ tersebut. berikut data yang kami ambil :
     * Stopword Removal, Tahap Filtering atau Stopword Removal adalah tahap pemilihan kata-kata yang dianggap penting.
 
     * Stemming, Stemming adalah proses pengubahan bentuk kata menjadi kata dasar atau tahap mencari root dari tiap kata.
+    
+    Dilanjutkan dengan Pembobotan data, Pembobotan kata yang dilakukan adalah kata yang terdapat dalam teks akan diberi berat atau bobot dengan menggunakan metode TF-IDF (Term Frequency - Inverse Document Frequency). Istilah yang terdapat pada satu dokumen lebih difokuskan pada TF (Term Frequency) sedangkan IDF(Inverse Document Frequency) lebih difokuskan pada istilah di banyak dokumen. Metode TF-IDF menggabungkan dua cara untuk perhitungan bobotnya, yaitu dengan menghitung frekuensi kemunculan kata di sebuah dokumen tertentu (TF) dan melakukan perhitungan invers terhadap frekuensi dokumen yang mengandung kata tersebut (IDF).Operator yang digunakan dalam menghubungkan operator dengan data tabel menggunakan operator nominal to text karena dalam Process Documents from Data harus bersifat teks sedangkan data pada tabel bersifat polynomial.
+    
 
     """)
     

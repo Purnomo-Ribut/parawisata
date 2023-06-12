@@ -292,6 +292,8 @@ elif option == 'Modeling':
 	    input_text = normalized_term(input_text)
 	    input_text = stopword_removal(input_text)
 	    input_text = stopword_removal2(input_text)
+	def get_stemming(document):
+		return [term_dict.get(term, term) for term in document]
 	    input_text = get_stemming(input_text)
 	    input_text = joinkata(input_text)
 

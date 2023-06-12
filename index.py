@@ -23,6 +23,11 @@ import pandas as pd
 #from sklearn.naive_bayes import GaussianNB
 #from sklearn.neighbors import KNeighborsClassifier
 #from sklearn.tree import DecisionTreeClassifier
+def load_dataset():
+	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
+	data = df.replace(",",".",regex=True)
+	data = df.drop(columns=["Unnamed: 0"])
+	return df
 
 option = st.sidebar.selectbox(
     'Silakan pilih:',
@@ -38,15 +43,30 @@ if option == 'Home' or option == '':
     st.write("""
                 Dataset yang kami gunakan dalam penelitian ini dengan cara scrawling data di google dengan
 website Mytrip dan website random lainnya. dalam website ini kami mengambil nama wisata dan penjelasan wisata
-tersebut. berikut data yang kami ambil 
+tersebut. berikut data yang kami ambil : 
     """)
+    st.dataframe(load_dataset())
     data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
     # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
-    data
+    data = data.drop('no', axis=1)
+    
     
 elif option == 'Modeling':
     st.write("""## Modeling Naive Bayes""") #menampilkan judul halaman dataframe
+    data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
+    # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
+    data = data.drop('no', axis=1)
+    data = data.drop('no', axis=1)
 
+    data
+    data.isnull().sum()
+    data.info()
+    #drop data kosong
+    data.dropna(inplace=True)
+    data.isnull().sum()
+    data["label"].value_counts()
+    
+    
     #membuat dataframe dengan pandas yang terdiri dari 2 kolom dan 4 baris data
     df = pd.DataFrame({
         'Column 1':[1,2,3,4],
@@ -82,22 +102,7 @@ with dataset:
 #ukuran data
 data.shape
 
-data = data.drop('no', axis=1)
 
-data
-
-data.isnull().sum()
-
-data.info()
-
-#drop data kosong
-data.dropna(inplace=True)
-
-data
-
-data.isnull().sum()
-
-data["label"].value_counts()
 
 #import regex as re
 

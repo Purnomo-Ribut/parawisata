@@ -36,7 +36,6 @@ if option == 'Home' or option == '':
     st.write("""# Halaman Utama""") #menampilkan halaman utama
     st.write (""" 
                 Purnomo Ribut | 200411100156
-    
                 Indra Ramadan Fadilafani | 200411100158 """)
     st.write("""
                 Dataset yang kami gunakan dalam penelitian ini dengan cara scrawling data di google dengan
@@ -48,11 +47,36 @@ tersebut. berikut data yang kami ambil :
     # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
     #data = data.drop('no', axis=1)
     st.write (""" 
-    Dataset ini terdiri dari 3 fitur yaitu 
+    Dataset ini terdiri dari 3 fitur yaitu :
     * nama berfungsi untuk menampung nama tempat Wisata
     * penjelasan berfungsi untuk menampung paragraf yang menjelaskan tempat wisata 
     * label berfungsi untuk melabeli apakah wisata termasuk 'Alam' atau 'Buatan'
     
+    Dari dataset tersebut kami lakukan Prepocessing data yang terdiri dari : 
+    * Cleaning 
+    Cleaning merupakan proses pembersihan data dari karakter yang tidak relevan
+seperti tanda baca, mention, character hashtag atau URL. Tujuan dari tahap ini
+adalah untuk membuat data lebih mudah diolah dan menghilangkan noise pada
+data. Cleaning text menggunakan library re dan pandas.
+
+    * Case Folding
+    Case Folding merupakan proses untuk mengkonversi teks ke dalam format huruf
+kecil (lowercase). Hal ini bertujuan untuk memberikan bentuk standar pada
+teks.
+
+    * Tokenizing
+    proses pemotongan teks menjadi bagian-bagian yang lebih kecil, yang disebut
+token. Pada proses ini juga dilakukan penghilangan angka, tanda baca dan
+karakter lain yang dianggap tidak memiliki pengaruh terhadap pemrosesan teks.
+
+    * Stopword Removal
+    Tahap Filtering atau Stopword Removal adalah tahap pemilihan kata-kata yang
+dianggap penting.
+
+    * Stemming
+    Stemming adalah proses pengubahan bentuk kata menjadi kata dasar atau tahap
+mencari root dari tiap kata.
+
     """)
     
     

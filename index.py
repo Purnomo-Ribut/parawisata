@@ -275,147 +275,41 @@ elif option == 'Modeling':
 	Y_pred = gnb_model.predict(X_test)
 	st.write(" GNB Accuracy : ",accuracy_score(Y_test,Y_pred)*100)
 
-    
-	    
+    	# Menampilkan judul halaman
+	st.write("Implementasi")
 
-	
+	# Menerima input teks dari pengguna
+	input_text = st.text_input("Masukkan teks untuk diprediksi")
+
+	# Tombol untuk memulai prediksi
+	if st.button("Prediksi"):
+	    # Melakukan preprocessing pada teks inputan
+	    input_text = delete_char(input_text)
+	    input_text = del_num(input_text)
+	    input_text = change_var(input_text)
+	    input_text = remove_punctuation(input_text)
+	    input_text = nltk.word_tokenize(input_text)
+	    input_text = normalized_term(input_text)
+	    input_text = stopword_removal(input_text)
+	    input_text = stopword_removal2(input_text)
+	    input_text = get_stemming(input_text)
+	    input_text = joinkata(input_text)
+
+	    # Melakukan transformasi TF-IDF pada teks inputan
+	    tfidf_input = tfidf_vectorizer.transform([input_text])
+
+	    # Melakukan prediksi label dengan menggunakan model Gaussian Naive Bayes
+	    label_pred = gnb_model.predict(tfidf_input)
+
+	    # Menampilkan hasil prediksi label
+	    st.write("Hasil Prediksi Label:", label_pred)
+
+
+
+
 
     
     
 elif option == 'Implementasi':	
 	st.write(""" Implementasi """) #menampilkan judul halaman 
-	import streamlit as st
-	import pandas as pd
-	import re
-	import nltk
-	from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-	from sklearn.feature_extraction.text import TfidfVectorizer
-	from sklearn.naive_bayes import GaussianNB
-	from sklearn.metrics import accuracy_score
-
-	# Membaca data dari file CSV
-	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
-	data = data.drop('no', axis=1)
-	data.isnull().sum()
-	data.dropna(inplace=True)
-	data["label"].value_counts()
-
-	# Preprocessing
-	def delete_char(text):
-	  text = text.replace('\\t',"").replace('\\n',"").replace('\\u',"").replace('\\',"")
-	  text = text.encode('ascii', 'replace').decode('ascii')
-	  return text.replace("http://"," ").replace("https://", " ").replace("https://","").replace("http://","")
-
-	def del_num(text):
-	  text = re.sub("\d+","",text)
-	  return text
-
-	def change_var(text):
-	  text = text.lower()
-	  return text
-
-	def remove_punctuation(text):
-	  text = re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ",text)
-	  return text
-
-	data["penjelasan"] = data["penjelasan"].apply(delete_char)
-	data["penjelasan"] = data["penjelasan"].apply(del_num)
-	data["penjelasan"] = data["penjelasan"].apply(change_var)
-	data["penjelasan"] = data["penjelasan"].apply(remove_punctuation)
-
-	# Normalisasi
-	normalize = pd.read_excel("Normalization Data.xlsx")
-	normalize_word_dict = {}
-
-	for row in normalize.iterrows():
-	  if row[0] not in normalize_word_dict:
-	    normalize_word_dict[row[0]] = row[1]
-
-	def normalized_term(comment):
-	  return [normalize_word_dict[term] if term in normalize_word_dict else term for term in comment]
-
-	data['comment_normalize'] = data['penjelasan'].apply(normalized_term)
-
-	# Stopword removal
-	nltk.download("stopwords")
-	from nltk.corpus import stopwords
-	txt_stopwords = stopwords.words("indonesian")
-
-	def stopword_removal(filter):
-	  filter = [word for word in filter if word not in txt_stopwords]
-	  return filter
-
-	data["stopwords_removal"] = data["comment_normalize"].apply(stopword_removal)
-
-	# Stopword removal 2
-	data_stopwords = pd.read_excel("list_stopwords.xlsx")
-
-	def stopword_removal2(filter):
-	  filter = [word for word in filter if word not in data_stopwords]
-	  return filter
-
-	data["stopwords_removal_final"] = data["stopwords_removal"].apply(stopword_removal2)
-
 	
-
-	
-
-	def get_stemming(document):
-	  from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-	  factory = StemmerFactory()
-	  stemmer = factory.create_stemmer()
-
-	  term_dict = {}
-	  for term in document:
-	    if term not in term_dict:
-	      term_dict[term] = stemmer.stem(term)
-	  return [term_dict[term] for term in document]
-
-
-	data['stemming'] = data['stopwords_removal_final'].swifter.apply(get_stemming)
-
-	# TF-IDF
-	def joinkata(data):
-	  kalimat = ""
-	  for i in data:
-	    kalimat += i
-	    kalimat += " "
-	  return kalimat
-
-	text = data['stemming'].swifter.apply(joinkata)
-
-	tfidf_vectorizer = TfidfVectorizer()
-	tfidf_separate = tfidf_vectorizer.fit_transform(text)
-	df_tfidf = pd.DataFrame(tfidf_separate.toarray(), columns=tfidf_vectorizer.get_feature_names_out(), index=data.index)
-
-	X = df_tfidf.values
-	Y = data['label']
-
-	# Model Naive Bayes
-	gnb_model = GaussianNB()
-	gnb_model.fit(X, Y)
-
-	# Prediksi teks baru
-	st.write(""" Implementasi """) # Menampilkan judul halaman 
-	input_text = st.text_input("Masukkan teks untuk diprediksi")
-
-	# Melakukan preprocessing pada teks inputan
-	input_text = delete_char(input_text)
-	input_text = del_num(input_text)
-	input_text = change_var(input_text)
-	input_text = remove_punctuation(input_text)
-	input_text = nltk.word_tokenize(input_text)
-	input_text = normalized_term(input_text)
-	input_text = stopword_removal(input_text)
-	input_text = stopword_removal2(input_text)
-	input_text = get_stemming(input_text)
-	input_text = joinkata(input_text)
-
-	# Melakukan transformasi TF-IDF pada teks inputan
-	tfidf_input = tfidf_vectorizer.transform([input_text])
-
-	# Melakukan prediksi label dengan menggunakan model Gaussian Naive Bayes
-	label_pred = gnb_model.predict(tfidf_input)
-
-	# Menampilkan hasil prediksi label
-	st.write("Hasil Prediksi Label:", label_pred)

@@ -29,10 +29,10 @@ def load_dataset():
 
 option = st.sidebar.selectbox(
     'Silakan pilih:',
-    ('Home','Modeling','Implementasi')
+    ('Dataset','Modeling','Implementasi')
 )
 
-if option == 'Home' or option == '':
+if option == 'Dataset' or option == '':
     st.write("""# Dataset""") #menampilkan halaman utama
     st.write (""" 
                 Purnomo Ribut | 200411100156

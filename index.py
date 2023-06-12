@@ -284,6 +284,13 @@ elif option == 'Modeling':
     
 elif option == 'Implementasi':	
 	st.write(""" Implementasi """) #menampilkan judul halaman 
+	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
+	data = data.drop('no', axis=1)
+	data.isnull().sum()
+	data.info()
+	data.dropna(inplace=True)
+	data.isnull().sum()
+	data["label"].value_counts()
 	"""## Preprocessing"""	
 	def delete_char(text):
 	  text = text.replace('\\t',"").replace('\\n',"").replace('\\u',"").replace('\\',"")

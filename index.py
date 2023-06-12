@@ -26,13 +26,19 @@ import pandas as pd
 
 option = st.sidebar.selectbox(
     'Silakan pilih:',
-    ('Home','Dataframe','Chart')
+    ('Home','Modeling','Chart')
 )
 
 if option == 'Home' or option == '':
     st.write("""# Halaman Utama""") #menampilkan halaman utama
-elif option == 'Dataframe':
-    st.write("""## Dataframe""") #menampilkan judul halaman dataframe
+    st.title('E-LEARNING STUDENTS REACTIONS')
+    st.write (""" Purnomo Ribut | 200411100156""")
+          (""" Indra Ramadan Fadilafani | 200411100158 """)
+    
+    
+    
+elif option == 'Modeling':
+    st.write("""## Modeling Naive Bayes""") #menampilkan judul halaman dataframe
 
     #membuat dataframe dengan pandas yang terdiri dari 2 kolom dan 4 baris data
     df = pd.DataFrame({
@@ -58,11 +64,7 @@ elif option == 'Chart':
 
 
 
-st.title('E-LEARNING STUDENTS REACTIONS')
-st.write ("""
-       Purnomo Ribut | 200411100156 <br>
-       Indra Ramadan Fadilafani | 200411100158
-""")
+
 dataset, modelling, implementasi = st.tabs(["Dataset", "Modelling", "Implementasi"])
 
 with dataset:

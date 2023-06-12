@@ -25,7 +25,7 @@ import pandas as pd
 #from sklearn.tree import DecisionTreeClassifier
 def load_dataset():
 	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")	
-	return df
+	return data
 
 option = st.sidebar.selectbox(
     'Silakan pilih:',

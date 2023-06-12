@@ -77,6 +77,7 @@ tersebut. berikut data yang kami ambil :
     
     
 elif option == 'Modeling':
+	
     st.write("""## Modeling Naive Bayes""") #menampilkan judul halaman dataframe
     #data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
     # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
@@ -90,40 +91,40 @@ elif option == 'Modeling':
     #data.dropna(inplace=True)
     #data.isnull().sum()
     #data["label"].value_counts()
-    def tambah_input(nama_metode): 
-	inputan=dict()
-	if nama_metode=="K-Nearst Neighbors" :
-		K= st.slider("K", 1,15)
-		inputan["K"]=K
-	elif nama_metode=="Decission Tree":
-		kriteria =st.selectbox("pilih kriteria",("entropy", "gini"))
-		inputan["kriteria"]= kriteria
-		max_depth =st.slider ("max depth",2,15)
-		inputan["max_depth"]=max_depth
-	return inputan
-     def pilih_kelas(nama_metode, inputan):
-	data = load_dataset()
-	# model=None
-	if nama_metode   == "K-Nearst Neighbors":
-		model =KNeighborsClassifier(n_neighbors = inputan["K"])
-	elif nama_metode == "Decission Tree":
-		model =DecisionTreeClassifier(criterion= inputan["kriteria"], max_depth= inputan["max_depth"])
-	elif nama_metode == "Naive Baiyes GaussianNB":
-		model = GaussianNB()
+    	def tambah_input(nama_metode): 
+		inputan=dict()
+		if nama_metode=="K-Nearst Neighbors" :
+			K= st.slider("K", 1,15)
+			inputan["K"]=K
+		elif nama_metode=="Decission Tree":
+			kriteria =st.selectbox("pilih kriteria",("entropy", "gini"))
+			inputan["kriteria"]= kriteria
+			max_depth =st.slider ("max depth",2,15)
+			inputan["max_depth"]=max_depth
+		return inputan
+     	def pilih_kelas(nama_metode, inputan):
+		data = load_dataset()
+		# model=None
+		if nama_metode   == "K-Nearst Neighbors":
+			model =KNeighborsClassifier(n_neighbors = inputan["K"])
+		elif nama_metode == "Decission Tree":
+			model =DecisionTreeClassifier(criterion= inputan["kriteria"], max_depth= inputan["max_depth"])
+		elif nama_metode == "Naive Baiyes GaussianNB":
+			model = GaussianNB()
 
-	# #fitur
-	X = data.iloc[:, :-1].astype(float)
-	# #hasil
-	y = data.Approved.astype(int)
+		# #fitur
+		X = data.iloc[:, :-1].astype(float)
+		# #hasil
+		y = data.Approved.astype(int)
 
-	#Proses Klasifikasi
-	#split unnormalized data
-	from sklearn.model_selection import train_test_split
-	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size =0.2, random_state=0)
-	model.fit(X_train, y_train)
-	st.write("Accuracy  = ", model.score(X_test, y_test))
-	st.session_state["model"] = nama_metode
-	st.session_state["inputan"] = inputan
+		#Proses Klasifikasi
+		#split unnormalized data
+		from sklearn.model_selection import train_test_split
+		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size =0.2, random_state=0)
+		model.fit(X_train, y_train)
+		st.write("Accuracy  = ", model.score(X_test, y_test))
+		st.session_state["model"] = nama_metode
+		st.session_state["inputan"] = inputan
 
 
 	metode = st.selectbox("Hasil metode akurasi berdasarkan dataset menggunakan:",('Naive Baiyes GaussianNB', 'K-Nearst Neighbors', 'Decission Tree'))

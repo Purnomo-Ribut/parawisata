@@ -33,7 +33,7 @@ option = st.sidebar.selectbox(
 )
 
 if option == 'Home' or option == '':
-    st.write("""# Halaman Utama""") #menampilkan halaman utama
+    st.write("""# Dataset""") #menampilkan halaman utama
     st.write (""" 
                 Purnomo Ribut | 200411100156
                 Indra Ramadan Fadilafani | 200411100158 """)

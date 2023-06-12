@@ -24,18 +24,16 @@ import pandas as pd
 #from sklearn.neighbors import KNeighborsClassifier
 #from sklearn.tree import DecisionTreeClassifier
 
-import numpy as np
-import pandas as pd
-
 st.title('E-LEARNING STUDENTS REACTIONS')
 st.write ("""Purnomo Ribut | 200411100156""")
 dataset, modelling, implementasi = st.tabs(["Dataset", "Modelling", "Implementasi"])
 
+with dataset:
+    """## Data Wisata Sumenep"""
+        data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
+        # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
+        data.head(5)
 
-"""## Data Wisata Sumenep"""
-data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
-# df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
-data.head(5)
 
 #ukuran data
 data.shape

@@ -59,23 +59,13 @@ seperti tanda baca, mention, character hashtag atau URL. Tujuan dari tahap ini
 adalah untuk membuat data lebih mudah diolah dan menghilangkan noise pada
 data. Cleaning text menggunakan library re dan pandas.
 
-    * Case Folding
-    Case Folding merupakan proses untuk mengkonversi teks ke dalam format huruf
-kecil (lowercase). Hal ini bertujuan untuk memberikan bentuk standar pada
-teks.
+    * Case Folding, Case Folding merupakan proses untuk mengkonversi teks ke dalam format huruf kecil (lowercase). Hal ini bertujuan untuk memberikan bentuk standar pada teks.
 
-    * Tokenizing
-    proses pemotongan teks menjadi bagian-bagian yang lebih kecil, yang disebut
-token. Pada proses ini juga dilakukan penghilangan angka, tanda baca dan
-karakter lain yang dianggap tidak memiliki pengaruh terhadap pemrosesan teks.
+    * Tokenizing, proses pemotongan teks menjadi bagian-bagian yang lebih kecil, yang disebu token. Pada proses ini juga dilakukan penghilangan angka, tanda baca dan karakter lain yang dianggap tidak memiliki pengaruh terhadap pemrosesan teks.
 
-    * Stopword Removal
-    Tahap Filtering atau Stopword Removal adalah tahap pemilihan kata-kata yang
-dianggap penting.
+    * Stopword Removal, Tahap Filtering atau Stopword Removal adalah tahap pemilihan kata-kata yang dianggap penting.
 
-    * Stemming
-    Stemming adalah proses pengubahan bentuk kata menjadi kata dasar atau tahap
-mencari root dari tiap kata.
+    * Stemming, Stemming adalah proses pengubahan bentuk kata menjadi kata dasar atau tahap mencari root dari tiap kata.
 
     """)
     

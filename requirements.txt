@@ -10,3 +10,4 @@ nltk
 openpyxl
 Sastrawi
 swifter
+wordcloud

@@ -30,9 +30,9 @@ dataset, modelling, implementasi = st.tabs(["Dataset", "Modelling", "Implementas
 
 with dataset:
     """## Data Wisata Sumenep"""
-        data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
-        # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
-        data.head(5)
+    data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
+    # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
+    data.head(5)
 
 
 #ukuran data

@@ -284,49 +284,48 @@ elif option == 'Modeling':
     
 elif option == 'Implementasi':	
 	st.write(""" Implementasi """) #menampilkan judul halaman 
+	import streamlit as st
+	import pandas as pd
+	import re
+	import nltk
+	from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+	from sklearn.feature_extraction.text import TfidfVectorizer
+	from sklearn.naive_bayes import GaussianNB
+	from sklearn.metrics import accuracy_score
+
+	# Membaca data dari file CSV
 	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
 	data = data.drop('no', axis=1)
 	data.isnull().sum()
-	data.info()
 	data.dropna(inplace=True)
-	data.isnull().sum()
 	data["label"].value_counts()
-	"""## Preprocessing"""	
+
+	# Preprocessing
 	def delete_char(text):
 	  text = text.replace('\\t',"").replace('\\n',"").replace('\\u',"").replace('\\',"")
 	  text = text.encode('ascii', 'replace').decode('ascii')
-	  return text.replace("http://"," ").replace("https://", " ")
-	  return text.replace("https://","").replace("http://","")
-	data["penjelasan"]=data["penjelasan"].apply(delete_char)
-	
-	#hapus angka
+	  return text.replace("http://"," ").replace("https://", " ").replace("https://","").replace("http://","")
+
 	def del_num(text):
-	  text =re.sub("\d+","",text)
+	  text = re.sub("\d+","",text)
 	  return text
-	data["penjelasan"]=data["penjelasan"].apply(del_num)
-	
-	#ubah huruf kecil
+
 	def change_var(text):
 	  text = text.lower()
 	  return text
-	data["penjelasan"]=data["penjelasan"].apply(change_var)
-	
-	#hapus tanda hubung
+
 	def remove_punctuation(text):
 	  text = re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ",text)
 	  return text
-	data["penjelasan"]=data["penjelasan"].apply(remove_punctuation)
-	
-	
-	from string import punctuation	
-	import nltk
-	nltk.download("punkt")
 
-	from nltk.tokenize import word_tokenize
-	data["hasil"]=data["penjelasan"].apply(lambda x: nltk.word_tokenize(x))
+	data["penjelasan"] = data["penjelasan"].apply(delete_char)
+	data["penjelasan"] = data["penjelasan"].apply(del_num)
+	data["penjelasan"] = data["penjelasan"].apply(change_var)
+	data["penjelasan"] = data["penjelasan"].apply(remove_punctuation)
 
+	# Normalisasi
 	normalize = pd.read_excel("Normalization Data.xlsx")
-	normalize_word_dict={}
+	normalize_word_dict = {}
 
 	for row in normalize.iterrows():
 	  if row[0] not in normalize_word_dict:
@@ -335,9 +334,9 @@ elif option == 'Implementasi':
 	def normalized_term(comment):
 	  return [normalize_word_dict[term] if term in normalize_word_dict else term for term in comment]
 
-	data['comment_normalize'] = data['hasil'].apply(normalized_term)
+	data['comment_normalize'] = data['penjelasan'].apply(normalized_term)
 
-	#stopword removal
+	# Stopword removal
 	nltk.download("stopwords")
 	from nltk.corpus import stopwords
 	txt_stopwords = stopwords.words("indonesian")
@@ -345,27 +344,21 @@ elif option == 'Implementasi':
 	def stopword_removal(filter):
 	  filter = [word for word in filter if word not in txt_stopwords]
 	  return filter
-	data["stopwords_removal"]=data["comment_normalize"].apply(stopword_removal)
 
-	#removal2
-	data_stopwords=pd.read_excel("list_stopwords.xlsx")
+	data["stopwords_removal"] = data["comment_normalize"].apply(stopword_removal)
 
-	def stopword_removal2 (filter):
-	  filter =[word for word in filter if word not in data_stopwords]
+	# Stopword removal 2
+	data_stopwords = pd.read_excel("list_stopwords.xlsx")
+
+	def stopword_removal2(filter):
+	  filter = [word for word in filter if word not in data_stopwords]
 	  return filter
-	data["stopwords_removal_final"]=data["stopwords_removal"].apply(stopword_removal2)
 
-	"""## Stemming"""
+	data["stopwords_removal_final"] = data["stopwords_removal"].apply(stopword_removal2)
 
-	#proses stem
-	from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
-	import string
-	import swifter
+	# Stemming
 	factory = StemmerFactory()
 	stemmer = factory.create_stemmer()
-
-	def stemming (term):
-	  return stemmer.stem(term)
 
 	term_dict = {}
 	for document in data['stopwords_removal_final']:
@@ -381,9 +374,7 @@ elif option == 'Implementasi':
 
 	data['stemming'] = data['stopwords_removal_final'].swifter.apply(get_stemming)
 
-	print(data['stemming'])
-
-	#Perhitungan TF-IDF
+	# TF-IDF
 	def joinkata(data):
 	  kalimat = ""
 	  for i in data:
@@ -393,30 +384,19 @@ elif option == 'Implementasi':
 
 	text = data['stemming'].swifter.apply(joinkata)
 
-	from sklearn.feature_extraction.text import TfidfVectorizer
 	tfidf_vectorizer = TfidfVectorizer()
 	tfidf_separate = tfidf_vectorizer.fit_transform(text)
+	df_tfidf = pd.DataFrame(tfidf_separate.toarray(), columns=tfidf_vectorizer.get_feature_names_out(), index=data.index)
 
-	df_tfidf = pd.DataFrame(
-	    tfidf_separate.toarray(), columns=tfidf_vectorizer.get_feature_names_out(), index=data.index)
 	X = df_tfidf.values
 	Y = data['label']
-	df_tfidf
-	
 
-	from sklearn.model_selection import train_test_split
-	X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.3, random_state = 100)
-
-	from sklearn.naive_bayes import GaussianNB
+	# Model Naive Bayes
 	gnb_model = GaussianNB()
-	gnb_model.fit(X_train, Y_train)
-	Y_pred = gnb_model.predict(X_test)
-	# Menggabungkan X_test dan Y_pred menjadi satu array dua dimensi
-	data_pred = list(zip(X_test, Y_pred))
+	gnb_model.fit(X, Y)
 
-	
-	
-	
+	# Prediksi teks baru
+	st.write(""" Implementasi """) # Menampilkan judul halaman 
 	input_text = st.text_input("Masukkan teks untuk diprediksi")
 
 	# Melakukan preprocessing pada teks inputan
@@ -439,21 +419,3 @@ elif option == 'Implementasi':
 
 	# Menampilkan hasil prediksi label
 	st.write("Hasil Prediksi Label:", label_pred)
-
-
-    
-
-   
-	
-
-
-
-
-
-
-
-
-
-
-
-

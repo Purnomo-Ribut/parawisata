@@ -260,7 +260,7 @@ elif option == 'Modeling':
 	
 	from sklearn.model_selection import train_test_split
 	X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.3, random_state = 100)
-	st.write("Pembagian Data Training dan Testing)
+	st.write("Pembagian Data Training dan Testing")
 	st.write("Jumlah Data training : ", len(X_train))
 	st.write("Jumlah Data test : ", len(X_test))
 
@@ -311,12 +311,3 @@ elif option == 'Modeling':
 	    # Menampilkan hasil prediksi label
 	    st.write("Hasil Prediksi Label:", label_pred)
 
-
-
-
-
-    
-    
-elif option == 'Implementasi':	
-	st.write(""" Implementasi """) #menampilkan judul halaman 
-	

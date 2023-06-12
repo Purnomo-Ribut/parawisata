@@ -19,6 +19,8 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import re
+import nltk
+nltk.download("punkt")
 
 #Modul library Metode 
 #from sklearn.naive_bayes import GaussianNB
@@ -151,9 +153,9 @@ elif option == 'Modeling':
 	st.write(""" Hasil Hapus Tanda Hubung """)
 	data
 	
-	from string import punctuation
-	import nltk 
+	import nltk
 	nltk.download("punkt")
+	from string import punctuation	
 
 	from nltk.tokenize import word_tokenize
 	data["hasil"]=data["penjelasan"].apply(lambda x: nltk.word_tokenize(x))

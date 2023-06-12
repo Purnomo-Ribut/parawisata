@@ -124,7 +124,7 @@ elif option == 'Modeling':
 	  return text.replace("http://"," ").replace("https://", " ")
 	  return text.replace("https://","").replace("http://","")
 	data["penjelasan"]=data["penjelasan"].apply(delete_char)
-	st.write(""" ###Hasil Cleaning """)	
+	st.write(""" Hasil Cleaning """)	
 	data
 	
 	#hapus angka
@@ -132,9 +132,24 @@ elif option == 'Modeling':
 	  text =re.sub("\d+","",text)
 	  return text
 	data["penjelasan"]=data["penjelasan"].apply(del_num)
-	st.write(""" ###Hasil Hapus Angka """)	
+	st.write(""" Hasil Hapus Angka """)	
 	data
 	
+	#ubah huruf kecil
+	def change_var(text):
+	  text = text.lower()
+	  return text
+	data["penjelasan"]=data["penjelasan"].apply(change_var)
+	st.write(""" Hasil Ubah Huruf Kecil """)
+	data
+	
+	#hapus tanda hubung
+	def remove_punctuation(text):
+	  text = re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ",text)
+	  return text
+	data["penjelasan"]=data["penjelasan"].apply(remove_punctuation)
+	st.write(""" Hasil Hapus Tanda Hubung """)
+	data
     
 	    
 
@@ -184,21 +199,11 @@ data.shape
 
 
 
-#ubah huruf kecil
-def change_var(text):
-  text = text.lower()
-  return text
-data["penjelasan"]=data["penjelasan"].apply(change_var)
-data
+
 
 from string import punctuation
 
-#hapus tanda hubung
-def remove_punctuation(text):
-  text = re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ",text)
-  return text
-data["penjelasan"]=data["penjelasan"].apply(remove_punctuation)
-data
+
 
 import nltk 
 nltk.download("punkt")

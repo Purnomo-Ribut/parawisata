@@ -284,6 +284,132 @@ elif option == 'Modeling':
     
 elif option == 'Implementasi':	
 	st.write(""" Implementasi """) #menampilkan judul halaman 
+	"""## Preprocessing"""	
+	def delete_char(text):
+	  text = text.replace('\\t',"").replace('\\n',"").replace('\\u',"").replace('\\',"")
+	  text = text.encode('ascii', 'replace').decode('ascii')
+	  return text.replace("http://"," ").replace("https://", " ")
+	  return text.replace("https://","").replace("http://","")
+	data["penjelasan"]=data["penjelasan"].apply(delete_char)
+	
+	#hapus angka
+	def del_num(text):
+	  text =re.sub("\d+","",text)
+	  return text
+	data["penjelasan"]=data["penjelasan"].apply(del_num)
+	
+	#ubah huruf kecil
+	def change_var(text):
+	  text = text.lower()
+	  return text
+	data["penjelasan"]=data["penjelasan"].apply(change_var)
+	
+	#hapus tanda hubung
+	def remove_punctuation(text):
+	  text = re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ",text)
+	  return text
+	data["penjelasan"]=data["penjelasan"].apply(remove_punctuation)
+	
+	
+	from string import punctuation	
+	import nltk
+	nltk.download("punkt")
+
+	from nltk.tokenize import word_tokenize
+	data["hasil"]=data["penjelasan"].apply(lambda x: nltk.word_tokenize(x))
+
+	normalize = pd.read_excel("Normalization Data.xlsx")
+	normalize_word_dict={}
+
+	for row in normalize.iterrows():
+	  if row[0] not in normalize_word_dict:
+	    normalize_word_dict[row[0]] = row[1]
+
+	def normalized_term(comment):
+	  return [normalize_word_dict[term] if term in normalize_word_dict else term for term in comment]
+
+	data['comment_normalize'] = data['hasil'].apply(normalized_term)
+
+	#stopword removal
+	nltk.download("stopwords")
+	from nltk.corpus import stopwords
+	txt_stopwords = stopwords.words("indonesian")
+
+	def stopword_removal(filter):
+	  filter = [word for word in filter if word not in txt_stopwords]
+	  return filter
+	data["stopwords_removal"]=data["comment_normalize"].apply(stopword_removal)
+
+	#removal2
+	data_stopwords=pd.read_excel("list_stopwords.xlsx")
+
+	def stopword_removal2 (filter):
+	  filter =[word for word in filter if word not in data_stopwords]
+	  return filter
+	data["stopwords_removal_final"]=data["stopwords_removal"].apply(stopword_removal2)
+
+	"""## Stemming"""
+
+	#proses stem
+	from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+	import string
+	import swifter
+	factory = StemmerFactory()
+	stemmer = factory.create_stemmer()
+
+	def stemming (term):
+	  return stemmer.stem(term)
+
+	term_dict = {}
+	for document in data['stopwords_removal_final']:
+	  for term in document:
+	    if term not in term_dict:
+	      term_dict[term] = ''
+
+	for term in term_dict:
+	  term_dict[term] = stemming(term)
+
+	def get_stemming(document):
+	  return [term_dict[term] for term in document]
+
+	data['stemming'] = data['stopwords_removal_final'].swifter.apply(get_stemming)
+
+	print(data['stemming'])
+
+	#Perhitungan TF-IDF
+	def joinkata(data):
+	  kalimat = ""
+	  for i in data:
+	    kalimat += i
+	    kalimat += " "
+	  return kalimat
+
+	text = data['stemming'].swifter.apply(joinkata)
+
+	from sklearn.feature_extraction.text import TfidfVectorizer
+	tfidf_vectorizer = TfidfVectorizer()
+	tfidf_separate = tfidf_vectorizer.fit_transform(text)
+
+	df_tfidf = pd.DataFrame(
+	    tfidf_separate.toarray(), columns=tfidf_vectorizer.get_feature_names_out(), index=data.index)
+	X = df_tfidf.values
+	Y = data['label']
+	df_tfidf
+	
+
+	from sklearn.model_selection import train_test_split
+	X_train, X_test, Y_train, Y_test = train_test_split( X, Y, test_size = 0.3, random_state = 100)
+
+	from sklearn.naive_bayes import GaussianNB
+	gnb_model = GaussianNB()
+	gnb_model.fit(X_train, Y_train)
+	Y_pred = gnb_model.predict(X_test)
+	# Menggabungkan X_test dan Y_pred menjadi satu array dua dimensi
+	data_pred = list(zip(X_test, Y_pred))
+
+	
+	
+	
 	input_text = st.text_input("Masukkan teks untuk diprediksi")
 
 	# Melakukan preprocessing pada teks inputan
@@ -310,7 +436,7 @@ elif option == 'Implementasi':
 
     
 
-    # Membuat inputan teks
+   
 	
 
 

@@ -356,21 +356,21 @@ elif option == 'Implementasi':
 
 	data["stopwords_removal_final"] = data["stopwords_removal"].apply(stopword_removal2)
 
-	# Stemming
-	factory = StemmerFactory()
-	stemmer = factory.create_stemmer()
+	
 
-	term_dict = {}
-	for document in data['stopwords_removal_final']:
-	  for term in document:
-	    if term not in term_dict:
-	      term_dict[term] = ''
-
-	for term in term_dict:
-	  term_dict[term] = stemming(term)
+	
 
 	def get_stemming(document):
+	  from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+	  factory = StemmerFactory()
+	  stemmer = factory.create_stemmer()
+
+	  term_dict = {}
+	  for term in document:
+	    if term not in term_dict:
+	      term_dict[term] = stemmer.stem(term)
 	  return [term_dict[term] for term in document]
+
 
 	data['stemming'] = data['stopwords_removal_final'].swifter.apply(get_stemming)
 

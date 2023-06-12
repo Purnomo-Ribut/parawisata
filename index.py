@@ -78,21 +78,32 @@ tersebut. berikut data yang kami ambil :
     
     
 elif option == 'Modeling':
+	st.write("""## Modeling Naive Bayes""") #menampilkan judul halaman dataframe
 	
-    st.write("""## Modeling Naive Bayes""") #menampilkan judul halaman dataframe
-    #data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
-    # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
-    #data = data.drop('no', axis=1)
-    #data = data.drop('no', axis=1)
+	data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
+	# df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
+	data = data.drop('no', axis=1)
+	#data = data.drop('no', axis=1)
+	data.isnull().sum()
+	data.info()
+	#drop data kosong
+	data.dropna(inplace=True)
+	data.isnull().sum()
+	data["label"].value_counts()
+	
+	"""## Preprocessing"""
+	def delete_char(text):
+	  text = text.replace('\\t',"").replace('\\n',"").replace('\\u',"").replace('\\',"")
+	  text = text.encode('ascii', 'replace').decode('ascii')
+	  return text.replace("http://"," ").replace("https://", " ")
+	  return text.replace("https://","").replace("http://","")
+	data["penjelasan"]=data["penjelasan"].apply(delete_char)
+	data
+	
+    
+	    
 
-    #data
-    #data.isnull().sum()
-    #data.info()
-    #drop data kosong
-    #data.dropna(inplace=True)
-    #data.isnull().sum()
-    #data["label"].value_counts()
-
+	
 
     
     #membuat dataframe dengan pandas yang terdiri dari 2 kolom dan 4 baris data
@@ -134,15 +145,7 @@ data.shape
 
 #import regex as re
 
-"""## Preprocessing"""
 
-def delete_char(text):
-  text = text.replace('\\t',"").replace('\\n',"").replace('\\u',"").replace('\\',"")
-  text = text.encode('ascii', 'replace').decode('ascii')
-  return text.replace("http://"," ").replace("https://", " ")
-  return text.replace("https://","").replace("http://","")
-data["penjelasan"]=data["penjelasan"].apply(delete_char)
-data
 
 #hapus angka
 def del_num(text):

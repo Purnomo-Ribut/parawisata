@@ -117,12 +117,23 @@ elif option == 'Modeling':
 	data["label"].value_counts()
 	
 	"""## Preprocessing"""
+	st.write("""Cleaning """)
 	def delete_char(text):
 	  text = text.replace('\\t',"").replace('\\n',"").replace('\\u',"").replace('\\',"")
 	  text = text.encode('ascii', 'replace').decode('ascii')
 	  return text.replace("http://"," ").replace("https://", " ")
 	  return text.replace("https://","").replace("http://","")
 	data["penjelasan"]=data["penjelasan"].apply(delete_char)
+	st.write("""Hasil Cleaning """)	
+	data
+	
+	#hapus angka
+	st.write("""Hapus Angka """)
+	def del_num(text):
+	  text =re.sub("\d+","",text)
+	  return text
+	data["penjelasan"]=data["penjelasan"].apply(del_num)
+	st.write("""Hasil Hapus Angka """)	
 	data
 	
     
@@ -172,12 +183,7 @@ data.shape
 
 
 
-#hapus angka
-def del_num(text):
-  text =re.sub("\d+","",text)
-  return text
-data["penjelasan"]=data["penjelasan"].apply(del_num)
-data
+
 
 #ubah huruf kecil
 def change_var(text):

@@ -36,6 +36,7 @@ if option == 'Home' or option == '':
     st.write("""# Dataset""") #menampilkan halaman utama
     st.write (""" 
                 Purnomo Ribut | 200411100156
+		
                 Indra Ramadan Fadilafani | 200411100158 """)
     st.write("""
                 Dataset yang kami gunakan dalam penelitian ini dengan cara scrawling data di google dengan

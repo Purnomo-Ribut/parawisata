@@ -281,35 +281,38 @@ elif option == 'Modeling':
 	
 
     
-    #membuat dataframe dengan pandas yang terdiri dari 2 kolom dan 4 baris data
-    #df = pd.DataFrame({
-     #   'Column 1':[1,2,3,4],
-      #  'Column 2':[10,12,14,16]
-    #})
-    #df #menampilkan dataframe
-elif option == 'Chart':
-    st.write("""## Draw Charts""") #menampilkan judul halaman 
+    
+elif option == 'Implementasi':
+    st.write(""" Implementasi """) #menampilkan judul halaman 
 
-    #membuat variabel chart data yang berisi data dari dataframe
-    #data berupa angka acak yang di-generate menggunakan numpy
-    #data terdiri dari 2 kolom dan 20 baris
-    chart_data = pd.DataFrame(
-        np.random.randn(20,2), 
-        columns=['a','b']
-    )
-    #menampilkan data dalam bentuk chart
-    st.line_chart(chart_data)
-    #data dalam bentuk tabel
-    chart_data
+    # Membuat inputan teks
+	input_text = st.text_input("Masukkan teks untuk diprediksi")
+
+	# Melakukan preprocessing pada teks inputan
+	input_text = delete_char(input_text)
+	input_text = del_num(input_text)
+	input_text = change_var(input_text)
+	input_text = remove_punctuation(input_text)
+	input_text = nltk.word_tokenize(input_text)
+	input_text = normalized_term(input_text)
+	input_text = stopword_removal(input_text)
+	input_text = stopword_removal2(input_text)
+	input_text = get_stemming(input_text)
+	input_text = joinkata(input_text)
+
+	# Melakukan transformasi TF-IDF pada teks inputan
+	tfidf_input = tfidf_vectorizer.transform([input_text])
+
+	# Melakukan prediksi label dengan menggunakan model Gaussian Naive Bayes
+	label_pred = gnb_model.predict(tfidf_input)
+
+	# Menampilkan hasil prediksi label
+	st.write("Hasil Prediksi Label:", label_pred)
 
 
 
 
 
-dataset, modelling, implementasi = st.tabs(["Dataset", "Modelling", "Implementasi"])
-
-with dataset:
-    """## Data Wisata Sumenep"""
 
 
 

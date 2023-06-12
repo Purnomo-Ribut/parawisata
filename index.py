@@ -20,9 +20,9 @@ import numpy as np
 import pandas as pd
 
 #Modul library Metode 
-from sklearn.naive_bayes import GaussianNB
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
+#from sklearn.naive_bayes import GaussianNB
+#from sklearn.neighbors import KNeighborsClassifier
+#from sklearn.tree import DecisionTreeClassifier
 
 import numpy as np
 import pandas as pd

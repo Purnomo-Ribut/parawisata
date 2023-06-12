@@ -153,9 +153,10 @@ elif option == 'Modeling':
 	st.write(""" Hasil Hapus Tanda Hubung """)
 	data
 	
+	
+	from string import punctuation	
 	import nltk
 	nltk.download("punkt")
-	from string import punctuation	
 
 	from nltk.tokenize import word_tokenize
 	data["hasil"]=data["penjelasan"].apply(lambda x: nltk.word_tokenize(x))

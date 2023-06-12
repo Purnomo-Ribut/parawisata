@@ -107,11 +107,11 @@ elif option == 'Modeling':
 
     
     #membuat dataframe dengan pandas yang terdiri dari 2 kolom dan 4 baris data
-    df = pd.DataFrame({
-        'Column 1':[1,2,3,4],
-        'Column 2':[10,12,14,16]
-    })
-    df #menampilkan dataframe
+    #df = pd.DataFrame({
+     #   'Column 1':[1,2,3,4],
+      #  'Column 2':[10,12,14,16]
+    #})
+    #df #menampilkan dataframe
 elif option == 'Chart':
     st.write("""## Draw Charts""") #menampilkan judul halaman 
 

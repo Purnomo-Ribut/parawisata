@@ -19,7 +19,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import re
-nltk.download("punkt")
+
 
 #Modul library Metode 
 #from sklearn.naive_bayes import GaussianNB

@@ -24,6 +24,11 @@ import pandas as pd
 #from sklearn.neighbors import KNeighborsClassifier
 #from sklearn.tree import DecisionTreeClassifier
 
+option = st.sidebar.selectbox(
+    'Silakan pilih:',
+    ('Home','Dataframe','Chart')
+)
+
 if option == 'Home' or option == '':
     st.write("""# Halaman Utama""") #menampilkan halaman utama
 elif option == 'Dataframe':

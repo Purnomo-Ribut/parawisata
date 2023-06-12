@@ -20,6 +20,9 @@ import numpy as np
 import pandas as pd
 import re
 
+pip install nltk
+
+
 
 #Modul library Metode 
 #from sklearn.naive_bayes import GaussianNB

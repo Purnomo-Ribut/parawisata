@@ -117,15 +117,14 @@ elif option == 'Modeling':
 	data.isnull().sum()
 	data["label"].value_counts()
 	
-	"""## Preprocessing"""
-	st.write("""Cleaning """)
+	"""## Preprocessing"""	
 	def delete_char(text):
 	  text = text.replace('\\t',"").replace('\\n',"").replace('\\u',"").replace('\\',"")
 	  text = text.encode('ascii', 'replace').decode('ascii')
 	  return text.replace("http://"," ").replace("https://", " ")
 	  return text.replace("https://","").replace("http://","")
 	data["penjelasan"]=data["penjelasan"].apply(delete_char)
-	st.write("""Hasil Cleaning """)	
+	st.write(""" ###Hasil Cleaning """)	
 	data
 	
 	#hapus angka
@@ -133,6 +132,7 @@ elif option == 'Modeling':
 	  text =re.sub("\d+","",text)
 	  return text
 	data["penjelasan"]=data["penjelasan"].apply(del_num)
+	st.write(""" ###Hasil Hapus Angka """)	
 	data
 	
     

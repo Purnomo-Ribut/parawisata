@@ -164,7 +164,7 @@ elif option == 'Modeling':
 
 	data
 
-	normalize = pd.read_excel("/content/drive/MyDrive/parawisata /Normalization Data.xlsx")
+	normalize = pd.read_excel("Normalization Data.xlsx")
 	normalize_word_dict={}
 
 	for row in normalize.iterrows():
@@ -189,7 +189,7 @@ elif option == 'Modeling':
 	data["stopwords_removal"]
 
 	#removal2
-	data_stopwords=pd.read_excel("/content/drive/MyDrive/parawisata /list_stopwords.xlsx")
+	data_stopwords=pd.read_excel("list_stopwords.xlsx")
 
 	def stopword_removal2 (filter):
 	  filter =[word for word in filter if word not in data_stopwords]

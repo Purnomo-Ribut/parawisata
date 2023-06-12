@@ -53,11 +53,7 @@ tersebut. berikut data yang kami ambil :
     * label berfungsi untuk melabeli apakah wisata termasuk 'Alam' atau 'Buatan'
     
     Dari dataset tersebut kami lakukan Prepocessing data yang terdiri dari : 
-    * Cleaning 
-    Cleaning merupakan proses pembersihan data dari karakter yang tidak relevan
-seperti tanda baca, mention, character hashtag atau URL. Tujuan dari tahap ini
-adalah untuk membuat data lebih mudah diolah dan menghilangkan noise pada
-data. Cleaning text menggunakan library re dan pandas.
+    * Cleaning, Cleaning merupakan proses pembersihan data dari karakter yang tidak relevaN seperti tanda baca, mention, character hashtag atau URL. Tujuan dari tahap ini adalah untuk membuat data lebih mudah diolah dan menghilangkan noise pada data. Cleaning text menggunakan library re dan pandas.
 
     * Case Folding, Case Folding merupakan proses untuk mengkonversi teks ke dalam format huruf kecil (lowercase). Hal ini bertujuan untuk memberikan bentuk standar pada teks.
 

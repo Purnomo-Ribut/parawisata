@@ -283,9 +283,7 @@ elif option == 'Modeling':
     
     
 elif option == 'Implementasi':
-    st.write(""" Implementasi """) #menampilkan judul halaman 
-
-    # Membuat inputan teks
+	st.write(""" Implementasi """) #menampilkan judul halaman 
 	input_text = st.text_input("Masukkan teks untuk diprediksi")
 
 	# Melakukan preprocessing pada teks inputan
@@ -309,6 +307,10 @@ elif option == 'Implementasi':
 	# Menampilkan hasil prediksi label
 	st.write("Hasil Prediksi Label:", label_pred)
 
+    
+
+    # Membuat inputan teks
+	
 
 
 

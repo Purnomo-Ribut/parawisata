@@ -44,9 +44,16 @@ website Mytrip dan website random lainnya. dalam website ini kami mengambil nama
 tersebut. berikut data yang kami ambil : 
     """)
     st.dataframe(load_dataset())
-    data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
+    #data = pd.read_csv("destinasi wisata madura - Sheet1.csv")
     # df.rename(columns={"d4r55":"Username","wiI7pd":"Ulasan"}, inplace=True)
-    data = data.drop('no', axis=1)
+    #data = data.drop('no', axis=1)
+    st.write (""" 
+    Dataset ini terdiri dari 3 fitur yaitu 
+    * nama berfungsi untuk menampung nama tempat Wisata
+    * penjelasan berfungsi untuk menampung paragraf yang menjelaskan tempat wisata 
+    * label berfungsi untuk melabeli apakah wisata termasuk 'Alam' atau 'Buatan'
+    
+    """)
     
     
 elif option == 'Modeling':

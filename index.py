@@ -32,8 +32,10 @@ option = st.sidebar.selectbox(
 if option == 'Home' or option == '':
     st.write("""# Halaman Utama""") #menampilkan halaman utama
     st.title('E-LEARNING STUDENTS REACTIONS')
-    st.write (""" Purnomo Ribut | 200411100156""")
-          (""" Indra Ramadan Fadilafani | 200411100158 """)
+    st.write (""" 
+                Purnomo Ribut | 200411100156
+    
+                Indra Ramadan Fadilafani | 200411100158 """)
     
     
     

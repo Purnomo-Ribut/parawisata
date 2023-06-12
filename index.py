@@ -25,7 +25,10 @@ import pandas as pd
 #from sklearn.tree import DecisionTreeClassifier
 
 st.title('E-LEARNING STUDENTS REACTIONS')
-st.write ("""Purnomo Ribut | 200411100156""")
+st.write ("""
+       Purnomo Ribut | 200411100156
+       Indra Ramadan Fadilafani | 200411100158
+""")
 dataset, modelling, implementasi = st.tabs(["Dataset", "Modelling", "Implementasi"])
 
 with dataset:
